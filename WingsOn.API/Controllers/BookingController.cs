@@ -41,7 +41,7 @@ namespace WingsOn.API.Controllers
         [ProducesResponseType(typeof(List<Person>), 200)]
         [ProducesResponseType(typeof(void), 400)]
         [Route("book/{customerId:int}/{targetPersonId:int}/{flightNumber}")]
-        [HttpGet]
+        [HttpPost]
         public ActionResult CreateBookingForFlight(int customerId, int targetPersonId, string flightNumber)
         {
             var result = _bookingService.CreateBookingForFlight(customerId, targetPersonId, flightNumber);

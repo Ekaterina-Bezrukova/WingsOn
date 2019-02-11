@@ -34,8 +34,11 @@ namespace WingsOn.API.Tests
             personRepository.Setup(x => x.Get(1)).Returns(() => null);
             var personService = new PersonService(personRepository.Object);
 
+            // Act
+            var exception = Assert.Throws<NotSupportedException>(() => personService.GetPersonById(1));
+
             // Assert
-            Assert.Throws<NotSupportedException>(() => personService.GetPersonById(1));
+            Assert.Equal("A person with id=1 does not exist", exception.Message);
         }
 
         [Fact]
@@ -104,8 +107,11 @@ namespace WingsOn.API.Tests
             personRepository.Setup(x => x.Get(1)).Returns(() => null);
             var personService = new PersonService(personRepository.Object);
 
+            // Act
+            var exception = Assert.Throws<NotSupportedException>(() => personService.UpdatePersonAddress(1, "newTestAddress"));
+
             // Assert
-            Assert.Throws<NotSupportedException>(() => personService.UpdatePersonAddress(1, "newTestAddress"));
+            Assert.Equal("A person with id=1 does not exist", exception.Message);
         }
 
  

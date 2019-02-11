@@ -1,11 +1,11 @@
-﻿using System;
-using Autofac;
-using log4net;
+﻿using Autofac;
+using AutofacSerilogIntegration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 using WingsOn.API.BusinessLogic.Contracts;
 using WingsOn.API.BusinessLogic.Services;
@@ -52,6 +52,15 @@ namespace WingsOn.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            //Configure Serilog
+            var configuration = new ConfigurationBuilder()
+                            .SetBasePath(env.ContentRootPath)
+                            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                            .Build();
+            Log.Logger = new LoggerConfiguration()
+                         .ReadFrom.ConfigurationSection(configuration.GetSection("Serilog"))
+                         .CreateLogger();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -78,7 +87,7 @@ namespace WingsOn.API
         /// </summary>
         public virtual void ConfigureContainer(ContainerBuilder builder)
         {
-            builder.Register(c => LogManager.GetLogger(type: typeof(Object))).As<ILog>();
+            builder.RegisterLogger(Log.Logger);
             builder.RegisterType<PersonService>().As<IPersonService>();
             builder.RegisterType<BookingService>().As<IBookingService>();
             builder.RegisterType<PersonRepository>().As<IRepository<Person>>().SingleInstance();

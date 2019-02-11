@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
+using Serilog;
 
 namespace WingsOn.API
 {
@@ -13,8 +14,8 @@ namespace WingsOn.API
                        .UseKestrel()
                        .UseContentRoot(Directory.GetCurrentDirectory())
                        .UseStartup<Startup>()
+                       .UseSerilog()
                        .Build();
-
             host.Run();
         }
     }
