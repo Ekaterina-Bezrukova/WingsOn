@@ -19,6 +19,7 @@ namespace WingsOn.API.Controllers
         /// <summary>
         /// Gets persons registered for flight.
         /// </summary>
+        /// <param name="flightNumber">Number of flight. Example - PZ696</param>
         /// <response code="200">Successful response</response>
         /// <response code="404">No people registered for flight</response>
         /// <response code="400">One of the required parameters is not transmitted</response>
@@ -36,6 +37,9 @@ namespace WingsOn.API.Controllers
         /// <summary>
         /// Create a booking for person.
         /// </summary>
+        /// <param name="customerId">An owner of booking</param>
+        /// <param name="targetPersonId">A person who will be registered</param>
+        /// <param name="flightNumber">Number of flight. Example - PZ696</param>
         /// <response code="200">Successful response</response>
         /// <response code="400">One of the required parameters is not transmitted</response>
         [ProducesResponseType(typeof(List<Person>), 200)]

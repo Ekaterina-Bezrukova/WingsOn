@@ -19,6 +19,7 @@ namespace WingsOn.API.Controllers
         /// <summary>
         /// Gets person information by id.
         /// </summary>
+        /// <param name="personId">Person identifier</param>
         /// <response code="200">Successful response</response>
         /// <response code="404">Person with specified id does not exist</response>
         /// <response code="400">One of the required parameters is not transmitted</response>
@@ -37,6 +38,7 @@ namespace WingsOn.API.Controllers
         /// <summary>
         /// Gets persons filtered by gender.
         /// </summary>
+        /// <param name="targetType">Target gender type. 1 - Male, 2 - Female </param>
         /// <response code="200">Successful response</response>
         /// <response code="404">Person with specified gender does not exist</response>
         /// <response code="400">One of the required parameters is not transmitted</response>
@@ -55,6 +57,8 @@ namespace WingsOn.API.Controllers
         /// <summary>
         /// Gets persons filtered by gender.
         /// </summary>
+        /// <param name="personId">Person Id</param>
+        /// <param name="newAddress">A new person's address</param>
         /// <response code="200">Successful response</response>
         /// <response code="404">Person with specified id does not exist</response>
         /// <response code="400">One of the required parameters is not transmitted</response>

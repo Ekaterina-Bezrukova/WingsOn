@@ -1,4 +1,6 @@
-﻿using Autofac;
+﻿using System;
+using System.IO;
+using Autofac;
 using AutofacSerilogIntegration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -46,6 +48,7 @@ namespace WingsOn.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "WingsOn API", Version = "v1" });
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "WingsOn.API.xml"));
             });
         }
 
