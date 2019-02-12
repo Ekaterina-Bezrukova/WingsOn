@@ -21,11 +21,11 @@ namespace WingsOn.API.Controllers
         /// </summary>
         /// <param name="personId">Person identifier</param>
         /// <response code="200">Successful response</response>
-        /// <response code="404">Person with specified id does not exist</response>
-        /// <response code="400">One of the required parameters is not transmitted</response>
+        /// <response code="404">Not found</response>
+        /// <response code="500">Something went wrong on server</response>
         [ProducesResponseType(typeof(Person), 200)]
         [ProducesResponseType(typeof(void), 404)]
-        [ProducesResponseType(typeof(void), 400)]
+        [ProducesResponseType(typeof(void), 500)]
         [Route("{personId:int}")]
         [HttpGet]
         public ActionResult GetPersonById(int personId)
@@ -40,11 +40,11 @@ namespace WingsOn.API.Controllers
         /// </summary>
         /// <param name="targetType">Target gender type. 1 - Male, 2 - Female </param>
         /// <response code="200">Successful response</response>
-        /// <response code="404">Person with specified gender does not exist</response>
-        /// <response code="400">One of the required parameters is not transmitted</response>
+        /// <response code="404">Not found</response>
+        /// <response code="500">Something went wrong on server</response>
         [ProducesResponseType(typeof(List<Person>), 200)]
         [ProducesResponseType(typeof(void), 404)]
-        [ProducesResponseType(typeof(void), 400)]
+        [ProducesResponseType(typeof(void), 500)]
         [Route("gender/{targetType:int}")]
         [HttpGet]
         public ActionResult GetPersonsByGender(GenderType targetType)
@@ -55,16 +55,16 @@ namespace WingsOn.API.Controllers
         }
 
         /// <summary>
-        /// Gets persons filtered by gender.
+        /// Updates person's address
         /// </summary>
         /// <param name="personId">Person Id</param>
         /// <param name="newAddress">A new person's address</param>
         /// <response code="200">Successful response</response>
-        /// <response code="404">Person with specified id does not exist</response>
-        /// <response code="400">One of the required parameters is not transmitted</response>
+        /// <response code="404">Not found</response>
+        /// <response code="500">Something went wrong on server</response>
         [ProducesResponseType(typeof(List<Person>), 200)]
         [ProducesResponseType(typeof(void), 404)]
-        [ProducesResponseType(typeof(void), 400)]
+        [ProducesResponseType(typeof(void), 500)]
         [Route("updateAddress/{personId:int}")]
         [HttpPut]
         public ActionResult UpdatePersonAddress(int personId, string newAddress)

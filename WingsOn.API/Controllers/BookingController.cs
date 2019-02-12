@@ -21,11 +21,11 @@ namespace WingsOn.API.Controllers
         /// </summary>
         /// <param name="flightNumber">Number of flight. Example - PZ696</param>
         /// <response code="200">Successful response</response>
-        /// <response code="404">No people registered for flight</response>
-        /// <response code="400">One of the required parameters is not transmitted</response>
+        /// <response code="404">Not found</response>
+        /// <response code="500">Something went wrong on server</response>
         [ProducesResponseType(typeof(List<Person>), 200)]
         [ProducesResponseType(typeof(void), 404)]
-        [ProducesResponseType(typeof(void), 400)]
+        [ProducesResponseType(typeof(void), 500)]
         [Route("getPassengersForFlight/{flightNumber}")]
         [HttpGet]
         public ActionResult GetPassengersByFlightNumber(string flightNumber)
@@ -41,9 +41,11 @@ namespace WingsOn.API.Controllers
         /// <param name="targetPersonId">A person who will be registered</param>
         /// <param name="flightNumber">Number of flight. Example - PZ696</param>
         /// <response code="200">Successful response</response>
-        /// <response code="400">One of the required parameters is not transmitted</response>
+        /// <response code="404">Not found</response>
+        /// <response code="500">Something went wrong on server</response>
         [ProducesResponseType(typeof(List<Person>), 200)]
-        [ProducesResponseType(typeof(void), 400)]
+        [ProducesResponseType(typeof(void), 404)]
+        [ProducesResponseType(typeof(void), 500)]
         [Route("book/{customerId:int}/{targetPersonId:int}/{flightNumber}")]
         [HttpPost]
         public ActionResult CreateBookingForFlight(int customerId, int targetPersonId, string flightNumber)
